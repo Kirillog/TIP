@@ -6,3 +6,9 @@ out/
 /target
 /project
 .DS_Store
+.envrc
+.bsp/
+.direnv/
+.metals/
+.vscode/
+
