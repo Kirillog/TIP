@@ -13,7 +13,7 @@
       in
       {
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ jdk21 sbt ];
+          buildInputs = with pkgs; [ jdk21 sbt graphviz ];
         };
       }
     );

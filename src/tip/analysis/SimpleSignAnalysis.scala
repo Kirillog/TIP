@@ -8,6 +8,7 @@ import tip.ast._
 import tip.solvers.FixpointSolvers
 
 import scala.collection.immutable.Set
+import shapeless.syntax.inject.InjectSyntax
 
 /**
   * Simple intra-procedural sign analysis.
@@ -85,10 +86,10 @@ class SimpleSignAnalysis(cfg: ProgramCfg)(implicit declData: DeclarationData) ex
       case r: CfgStmtNode =>
         r.data match {
           // var declarations
-          case varr: AVarStmt => ??? //<--- Complete here
+          case varr: AVarStmt => varr.declIds.foldLeft(s)((acc, id) => acc + (id -> SignLattice.top))
 
           // assignments
-          case AAssignStmt(id: AIdentifier, right, _) => ??? //<--- Complete here
+          case AAssignStmt(id: AIdentifier, right, _) => s + (declData(id) -> eval(right, s))
 
           // all others: like no-ops
           case _ => s
